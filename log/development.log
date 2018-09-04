@@ -2660,3 +2660,42 @@ Completed 200 OK in 31ms (Views: 27.8ms | ActiveRecord: 0.2ms)
   ↳ bin/rails:4
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   ↳ bin/rails:4
+Started GET "/" for 127.0.0.1 at 2018-09-03 20:01:46 -0400
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/geoff/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by StoriesController#index as HTML
+  Rendering stories/index.html.erb within layouts/application
+  [1m[36mStory Load (0.7ms)[0m  [1m[34mSELECT "stories".* FROM "stories"[0m
+  ↳ app/views/stories/index.html.erb:10
+  Rendered stories/index.html.erb within layouts/application (15.3ms)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Completed 200 OK in 225ms (Views: 204.5ms | ActiveRecord: 7.5ms)
+
+
+Started GET "/stories/new" for 127.0.0.1 at 2018-09-03 20:01:51 -0400
+Processing by StoriesController#new as HTML
+  Rendering stories/new.html.erb within layouts/application
+  Rendered stories/_form.html.erb (6.9ms)
+  Rendered stories/new.html.erb within layouts/application (9.5ms)
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6
+Completed 200 OK in 52ms (Views: 41.9ms | ActiveRecord: 0.9ms)
+
+
+Started DELETE "/session" for 127.0.0.1 at 2018-09-03 20:01:57 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"kswqUz3vmlMY/9sxKtKRIGctpFoVaAVWOAN0cN4SluwiePLLmADKjJUR4qKfHeUllsfYmafXd0Xpp3ECMhkwJQ=="}
+Redirected to http://0.0.0.0:3000/stories
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/stories" for 127.0.0.1 at 2018-09-03 20:01:57 -0400
+Processing by StoriesController#index as HTML
+  Rendering stories/index.html.erb within layouts/application
+  [1m[36mStory Load (0.8ms)[0m  [1m[34mSELECT "stories".* FROM "stories"[0m
+  ↳ app/views/stories/index.html.erb:10
+  Rendered stories/index.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 49ms (Views: 45.9ms | ActiveRecord: 0.8ms)
+
+
