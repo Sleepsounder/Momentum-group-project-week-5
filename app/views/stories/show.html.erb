@@ -4,75 +4,76 @@
 
 <%= link_to "Back", stories_path %>
 
-<div>
-  <div>
-    <h1><%= @story.title %></h1>
-    <h6>By <%= @story.username %></h6>
-    <% begin %>
-      <%= image_tag "#{@story.img_url}" %>
-    <% rescue %>
-    <% end %>
-    <div>
-      <p><%= @story.text %></p>
+<div id="body_container" class="wrapper">
+  <div class="left_side_wrapper">
+    <div class="phigg_container">
+        <div class="phigg_header white_link"><%= content_tag :div, "#{@story.title}", { :id => "story_title" } %><div>Likes <%= @story.votes_for.size %> | <%= link_to like_story_path(@story), method: :put do %>
+                +1
+            <% end %></div>
+        </div>
+        <div class="phigg_byline">Created by: <%= @story.username %> on <%= @story.created_at %>.</div>
+        <div class="phigg_body">
+            <% begin %>
+            <%= image_tag "#{@story.img_url}", { :style => "align: right" }%>
+            <% rescue %>
+            <% end %>
+            <p><%= @story.text %></p>
+        </div>
     </div>
-  </div>
-</div>
 
-<div class="form-group">
-<%= form_for [@story, Comment.new] do |form| %>
-  <%if current_user 
-    user = User.find_by_id(session[:user_id])
-  
-  username = user.username
-  end
-  %>
-   <%= form.hidden_field :username, value: username %>
-   <%= form.hidden_field :story_id, value: @story.id %>
-   <%= form.text_area  :text, class:"form-control", placeholder: 'Comment'%>
-   <%= form.submit "Add Comment", class:"btn btn-controller" %>
-  <% end %>
-</div>
+    <div class="form-group">
+        <%= form_for [@story, Comment.new] do |form| %>
+            <% if current_user 
+                user = User.find_by_id(session[:user_id])
+                username = user.username
+            end %>
+            <%= form.hidden_field :username, value: username %>
+            <%= form.hidden_field :story_id, value: @story.id %>
+            <%= form.text_area  :text, class: "form-control", placeholder: 'Comment'%>
+            <%= form.submit "Add Comment", class: "btn btn-controller" %>
+        <% end %>
+    </div>
 
-<div>
-<h3>Comments</h3>
-<% @story.comments.each do |comment| %>
-   <div class="">
-       <ul>
-           <li>
-           <p><%= "User: #{comment.username}"%></p>
-           <p><%= comment.text %></p>
-           <% date = Time.now%>
-           <%total = date - comment.created_at%>
-           <%
-               if total <=1800 then
+    <div>
+        <h4>Comments</h4>
+        <% @story.comments.each do |comment| %>
+        <div class="">
+            <ul>
+                <li>
+                <p><%= "User: #{comment.username}"%></p>
+                <p><%= comment.text %></p>
+                <% date = Time.now%>
+                <%total = date - comment.created_at%>
+                <% if total <=1800 then
                    diff = (total / 1.second).round
                    message = "seconds ago"
-               elsif total > 1800 && total < 3600
+                elsif total > 1800 && total < 3600
                    diff = (total / 1.minute).round
                    message = "minutes ago"
-               elsif total > 3600 && total < 86340
+                elsif total > 3600 && total < 86340
                    diff = (total / 1.hour).round
                    message = "hours ago"
-               elsif total >= 86341
+                elsif total >= 86341
                    diff = (total / 1.day).round
                    message = "days ago"
-               end
-           %>
-           <p><%= "Submitted: #{diff} " + message%>
-           <% if !comment.comments.empty? %>
-               <ul>
-                   <% comment.comments.each do |reply|%>
-                   <li>
-                       <p><%= "User: #{reply.username}"%></p>
-                       <p><%= reply.text%></p>
-                   </li>
-                   <%end%>
-               </ul>
-           <%end%>
-           <%= render partial: "comments/comment", locals:{commentable: comment, story_id: @story.id}%>
-           </li>
-       </ul>
-
-   </div>
-<%end%>
+                end %>
+                <p><%= "Submitted: #{diff} " + message%>
+                <% if !comment.comments.empty? %>
+                    <ul>
+                        <% comment.comments.each do |reply|%>
+                        <li>
+                            <p><%= "User: #{reply.username}"%></p>
+                            <p><%= reply.text%></p>
+                        </li>
+                        <%end%>
+                    </ul>
+                <%end%>
+                <%= render partial: "comments/comment", locals:{commentable: comment, story_id: @story.id}%>
+                </li>
+            </ul>
+        </div>
+        <%end%>
+    </div>
+  </div>
+  <%= render 'rightsidemodules' %>
 </div>

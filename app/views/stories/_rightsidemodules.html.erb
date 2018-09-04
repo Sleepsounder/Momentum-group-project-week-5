@@ -1,0 +1,46 @@
+  <div class="right_side_wrapper">
+    <div id="rs_module_1" class="rs_modules"><%# If logged in, User info here ? %>
+      <div id="rsm1_header" class="rsm_header white_link">User info
+      </div>
+      <div id="rsm1_body" class="rsm_body">
+        <% if current_user %>
+            <ul>
+                <li>Username: <%= current_user.username %></li>
+                <li>Name: <%= current_user.name %></li>
+                <li>Email: <%= current_user.email %></li>
+            </ul>
+        <% else %>
+            Please <%= link_to 'Log In', new_session_path, { :class=>"text-right text-white btn btn-secondary text-white"} %> to see your user info
+        <% end %>
+      </div>
+    </div>
+    <div id="rs_module_2" class="rs_modules"><%# Most popular stories ? %>
+      <div id="rsm2_header" class="rsm_header white_link">Stories You've Liked
+      </div>
+      <div id="rsm2_body" class="rsm_body">
+        <% if current_user %>
+            <ul>
+            <% current_user.find_voted_items.each do |liked| %>
+                <li><%= liked.title %></li>
+            <% end %>
+            </ul>
+        <% else %>
+            Log in to like stories.
+        <% end %>
+      </div>
+    </div>
+<% if false %>
+    <div id="rs_module_3" class="rs_modules"><%#  %>
+      <div id="rsm3_header" class="rsm_header white_link">
+      </div>
+      <div id="rsm3_body" class="rsm_body">
+      </div>
+    </div>
+    <div id="rs_module_4" class="rs_modules"><%#  %>
+      <div id="rsm4_header" class="rsm_header white_link">
+      </div>
+      <div id="rsm4_body" class="rsm_body">
+      </div>
+    </div>
+<% end %>
+  </div>

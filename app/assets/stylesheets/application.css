@@ -35,10 +35,10 @@ body {
     background-color: crimson;
 }
 
-.logged_banner a:link,
-.logged_banner a:visited,
-.logged_banner a:hover,
-.logged_banner a:active {
+.white_link a:link,
+.white_link a:visited,
+.white_link a:hover,
+.white_link a:active {
     color: #ffffff;
     text-decoration: none;
 }
@@ -46,4 +46,9 @@ body {
 #logo_block {
     width: 20%;
     float: left;
+    font: 
+}
+
+h1, h2, .h1, .h2 {
+    margin-bottom: 0px;
 }
