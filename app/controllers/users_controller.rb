@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   
   def index
-    
   end
   
   def show
@@ -22,7 +21,7 @@ class UsersController < ApplicationController
  
     if
       @user.save
-      redirect_to @user
+      redirect_to stories_path
     else
       render 'new'
     end

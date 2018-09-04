@@ -13,13 +13,13 @@
   <body>
     <% if current_user %>
       <div class="logged_banner logged_in">
-        <div id="logo_block" class="logo_cell"><h2>PHIGGit</h2></div>
+        <div id="logo_block" class="logo_cell"><h2><%= link_to "PHIGGit", stories_path %></h2></div>
         <%= link_to 'Log out', session_path, method: :delete, :class=>"text-right text-white btn btn-secondary text-white"  %>
         <div class="btn btn-primary">Welcome, <%= current_user.username %></div>
       </div>
     <% else %>
       <div class="logged_banner logged_out">
-        <div id="logo_block" class="logo_cell"><h1>PHIGGit</h1></div>
+        <div id="logo_block" class="logo_cell"><h1><a href ='localhost:3000/stories'><%= link_to "PHIGGit", stories_path %></a></h1></div>
         <%= link_to 'Sign Up', new_user_path, { :class=>"text-right text-white btn btn-secondary text-white"} %> | 
         <%= link_to 'Log In', new_session_path, { :class=>"text-right text-white btn btn-secondary text-white"} %>
       </div>

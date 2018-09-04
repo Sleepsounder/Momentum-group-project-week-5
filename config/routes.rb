@@ -8,12 +8,22 @@ Rails.application.routes.draw do
 
   resources :stories do
     resources :comments
+    member do
+      put "like", to: "stories#upvote"
+    end
   end
+
+  get 'users/new'
+  resources :users
 
   root 'stories#index'
 
 
-get 'users/new'
-resources :users
+  #Gene's addition
+  resources :comments do
+    resources :comments
+  end
+
+
 
 end
